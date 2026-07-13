@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import Navbar from '@/components/Navbar';
+import MobileDock from '@/components/MobileDock';
+import BackToTop from '@/components/BackToTop';
+import FloatingContact from '@/components/FloatingContact';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Projects from '@/pages/Projects';
@@ -29,6 +32,9 @@ function App() {
         <ScrollToTop />
         <div className="min-h-screen bg-background text-foreground">
           <Navbar />
+          <MobileDock />
+          <BackToTop />
+          <FloatingContact />
           <main>
             <Routes>
               <Route path="/" element={<Home />} />

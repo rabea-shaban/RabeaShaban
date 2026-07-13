@@ -1,40 +1,62 @@
 export const experience = [
   {
-    title: "Freelance Full-Stack Developer",
+    title: "Freelance Full Stack Software Engineer",
     period: "2023 - Present",
     description:
-      "Working with clients in Egypt and internationally to build scalable web applications using React.js, Next.js, and .NET Core, focusing on performance, clean code, and user experience.",
+      "Developing, designing, and maintaining end-to-end web applications for international and regional clients, utilizing the MERN stack, Next.js, and AWS cloud hosting. Implementing clean architecture, robust JWT auth, REST APIs, and database schemes.",
     skills: [
-      "React.js",
+      "React",
       "Next.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
       "TypeScript",
-      "JavaScript (ES6+)",
-      "HTML5 & CSS3",
-      "Tailwind CSS",
-      "MUI",
-      ".NET Core",
-      "REST APIs",
+      "AWS",
+      "Docker",
       "Git & GitHub",
-      "Responsive Design",
-      "UX/UI Principles",
+      "REST APIs",
+      "JWT"
     ],
   },
   {
-    title: "Web Development Projects",
-    period: "2022 - 2023",
+    title: "Meta Front-End Developer Professional Certificate",
+    period: "2024 - 2026",
     description:
-      "Built and deployed multiple real-world projects including user management systems, e-commerce platforms, and business websites using modern front-end technologies and best practices.",
+      "In-depth professional training under Meta specialists covering UX/UI design principles, advanced React patterns, client-side routing, hooks, state management, testing, and final responsive web capstone project.",
     skills: [
-      "React.js",
-      "Advanced React Patterns",
-      "Redux & State Management",
-      "HTML & CSS In Depth",
+      "React",
+      "UX/UI Principles",
+      "Figma",
+      "Jest",
+      "Responsive Web Design"
+    ],
+  },
+  {
+    title: "Digital Egypt Pioneers Initiative (DEPI)",
+    period: "2024",
+    description:
+      "Collaborated as a Full Stack Developer (.NET + React) in building enterprise systems. Built a full-stack agricultural supplies e-commerce platform featuring multi-role authentication, dashboard visualization, and secure Stripe payment integration.",
+    skills: [
+      "React",
+      "TypeScript",
+      ".NET Core",
+      "Entity Framework",
+      "SQL Server",
+      "REST APIs",
+      "Teamwork"
+    ],
+  },
+  {
+    title: "National Telecommunications Institute (NTI)",
+    period: "2023",
+    description:
+      "Trained in modern web development paradigms. Built 'Tarahoj Dental Clinic' website with a comprehensive appointment booking flow and clinic manager dashboard.",
+    skills: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
       "Bootstrap",
-      "Firebase",
-      "Version Control (Git)",
-      "Database Fundamentals",
-      "RESTful APIs",
-      "Problem Solving",
+      "API Integration"
     ],
   },
 ];

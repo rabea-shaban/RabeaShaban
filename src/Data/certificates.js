@@ -26,6 +26,19 @@ export const certificates = [
     image: "/certificate-placeholder.jpg",
   },
   {
+    id: 100,
+    title: "AWS Academy Cloud Foundations",
+    issuer: "AWS Academy",
+    date: "2025",
+    category: "Cloud",
+    grade: "Completed",
+    description:
+      "Detailed education in cloud computing concepts, AWS core services, security, architecture, pricing, and support models.",
+    icon: Cloud,
+    verified: true,
+    image: "/awsCloudFoundations.jpg",
+  },
+  {
     id: 2,
     title: "Meta Front-End Developer",
     issuer: "Meta (Coursera)",

@@ -1,10 +1,10 @@
 import {
-  Code2,
-  Database,
   Globe,
-  Palette,
   Server,
-  Smartphone,
+  Database,
+  Cloud,
+  Activity,
+  Wrench
 } from "lucide-react";
 
 export const skills = [
@@ -12,39 +12,67 @@ export const skills = [
     category: "Frontend",
     icon: Globe,
     skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
+      "React",
+      "Next.js",
       "TypeScript",
-      "React.js",
-      "Redux",
-      "Context API",
-      "Vite",
+      "JavaScript",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "Material UI",
+      "React Hook Form"
     ],
   },
   {
     category: "Backend",
     icon: Server,
-    skills: [".NET Core", "API Development", "RESTful Services"],
-  },
-  {
-    category: "Styling",
-    icon: Palette,
-    skills: ["Bootstrap", "Tailwind CSS", "Sass", "Responsive Design"],
-  },
-  {
-    category: "CMS & Tools",
-    icon: Code2,
-    skills: ["WordPress", "Elementor", "Blocksy", "Git", "GitHub"],
+    skills: [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "JWT Authentication",
+      "Socket.io"
+    ],
   },
   {
     category: "Database",
     icon: Database,
-    skills: ["SQL Server", "MySQL", "API Integration"],
+    skills: [
+      "MongoDB",
+      "Mongoose",
+      "MySQL"
+    ],
   },
   {
-    category: "Deployment",
-    icon: Smartphone,
-    skills: ["Hosting", "Deployment", "Domain Management"],
+    category: "Cloud & DevOps",
+    icon: Cloud,
+    skills: [
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "Helm",
+      "Terraform",
+      "GitHub Actions",
+      "Linux",
+      "Nginx"
+    ],
+  },
+  {
+    category: "Monitoring",
+    icon: Activity,
+    skills: [
+      "Prometheus",
+      "Grafana"
+    ],
+  },
+  {
+    category: "Tools",
+    icon: Wrench,
+    skills: [
+      "Git",
+      "GitHub",
+      "Postman",
+      "VS Code",
+      "Figma"
+    ],
   },
 ];

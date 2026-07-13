@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rabea-shaban.com/sitemap.xml
