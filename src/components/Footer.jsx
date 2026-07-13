@@ -26,7 +26,7 @@ const Footer = () => {
     },
     { icon: Mail, href: "mailto:rabea-elzayate@gmail.com", label: "Email" },
     { icon: Phone, href: "https://wa.me/201156807072", label: "WhatsApp" },
-    { icon: Globe, href: "https://rabea-shaban.com", label: "Website" },
+    { icon: Globe, href: "https://rabea-shaban.vercel.app", label: "Website" },
     {
       icon: Briefcase,
       href: "https://upwork.com/freelancers/~01d2bd68b7d6e8fbce",

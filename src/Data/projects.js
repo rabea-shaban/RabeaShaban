@@ -81,7 +81,7 @@ export const projects = [
     description: "My personal portfolio showcasing my projects, technical skills, certifications, and professional journey with modern UI, responsive design, and smooth animations.",
     tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     category: ["React", "website"],
-    demo: "https://rabea-shaban.com/",
+    demo: "https://rabea-shaban.vercel.app/",
     github: "https://github.com/rabea-shaban/portfolio-2026",
     featured: true,
     features: [

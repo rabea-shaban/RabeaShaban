@@ -8,7 +8,7 @@ try {
   config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 } catch (error) {
   console.error('Error reading siteConfig.json, using fallback domain.');
-  config = { domain: 'https://rabea-shaban.com' };
+  config = { domain: 'https://rabea-shaban.vercel.app' };
 }
 
 const domain = config.domain.replace(/\/$/, ''); // Remove trailing slash if any
