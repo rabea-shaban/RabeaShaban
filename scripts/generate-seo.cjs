@@ -20,7 +20,7 @@ const pages = [
   { path: '/projects', priority: '0.9', changefreq: 'monthly' },
   { path: '/services', priority: '0.8', changefreq: 'monthly' },
   { path: '/contact', priority: '0.7', changefreq: 'monthly' },
-  { path: '/Certificates', priority: '0.7', changefreq: 'monthly' }
+  { path: '/certificates', priority: '0.7', changefreq: 'monthly' }
 ];
 
 const currentDate = new Date().toISOString().split('T')[0];

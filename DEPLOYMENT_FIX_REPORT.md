@@ -1,62 +1,104 @@
 # DEPLOYMENT_FIX_REPORT.md
 
-## Root Cause
+## Summary
 
-The application returned `404: NOT_FOUND` on page refresh because **`public/vercel.json` was overriding the correct root-level `vercel.json`** at build time.
+Four distinct issues were found and fixed. All of them contributed to the 404-on-refresh problem or would have caused it under specific conditions.
 
-Vite copies every file inside `public/` directly into `dist/` verbatim. This means `dist/vercel.json` was being produced from `public/vercel.json`, not from the root `vercel.json`. Vercel reads the config from the output directory (`dist/`), so the root `vercel.json` was effectively ignored on every deployment.
+---
 
-The `public/vercel.json` contained:
+## Issue 1 — `vercel.json` used deprecated `routes` API with `{ "handle": "filesystem" }`
 
-```json
-{
-  "cleanUrls": true,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}
-```
+### Why it happened
 
-The `{ "handle": "filesystem" }` directive tells Vercel to serve real static files first and only fall back to the next route if a matching file exists on disk. Since `/about`, `/projects`, `/services`, `/contact`, and `/certificates` are not real files in `dist/`, Vercel found no match after the filesystem check and returned `404` — the fallback `dest: /index.html` was never reached because the `routes` array was processed incorrectly with the legacy API.
+A previous commit (`4dbe44f`) added `{ "handle": "filesystem" }` to `vercel.json` in an attempt to serve static files like `sitemap.xml` correctly. This is the legacy Vercel routing API. The `handle: filesystem` directive tells Vercel: *check if a real file exists at this path first, and only continue to the next route if no file is found.* Since `/about`, `/projects`, `/services`, `/contact`, and `/certificates` are not real files in `dist/`, Vercel found no match and returned 404 — the fallback `dest: /index.html` was never reached.
 
-Additionally, the `routes` key is the **deprecated Vercel routing API**. Mixing it with `cleanUrls` causes undefined behavior. The correct modern API uses `rewrites`.
+### Fix
 
-## Files Changed
-
-| File | Action | Reason |
-|---|---|---|
-| `public/vercel.json` | **Deleted** | Was being copied into `dist/` by Vite, overriding the correct root config with a broken legacy `routes` config |
-
-## Why the Issue Happened
-
-1. The project had **two `vercel.json` files**: one at the root (correct) and one inside `public/` (broken).
-2. Vite's build process copies `public/` contents into `dist/` — so `dist/vercel.json` always came from `public/vercel.json`.
-3. Vercel reads deployment config from the output directory. The root `vercel.json` was never used.
-4. The `public/vercel.json` used the deprecated `routes` API with `{ "handle": "filesystem" }`, which caused Vercel to return 404 for all SPA client-side routes instead of serving `index.html`.
-
-## Why the Solution Works
-
-The root `vercel.json` uses the modern `rewrites` API:
+Replaced the deprecated `routes` array with the modern `rewrites` key. The `rewrites` API is the correct way to implement SPA fallback on Vercel. It uses a negative lookahead regex to exclude real static asset paths (`/assets/...` and any path containing a file extension) so those are served directly, while all other paths fall through to `index.html`.
 
 ```json
 {
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!assets|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]
 }
 ```
 
-With `public/vercel.json` deleted, Vite no longer copies any `vercel.json` into `dist/`. Vercel then reads the root `vercel.json` directly (Vercel reads root config before checking the output directory for framework projects). The `rewrites` rule catches every request that doesn't match a real static asset and serves `index.html`, allowing React Router's `BrowserRouter` to handle the route client-side. This is the correct SPA fallback pattern.
+---
+
+## Issue 2 — `public/vercel.json` shadowed the root `vercel.json`
+
+### Why it happened
+
+A second commit (`ce76bb0`) placed a `vercel.json` inside `public/`. Vite copies everything in `public/` verbatim into `dist/` at build time. Vercel reads deployment config from the output directory (`dist/`), so `dist/vercel.json` (from `public/vercel.json`) was the config Vercel actually used — the root `vercel.json` was completely ignored on every deployment.
+
+The `public/vercel.json` contained the broken `routes` + `handle: filesystem` config, making Issue 1 permanent regardless of what the root `vercel.json` said.
+
+### Fix
+
+Deleted `public/vercel.json`. The root `vercel.json` is now the only config file and is read correctly by Vercel.
+
+---
+
+## Issue 3 — Route case mismatch: `/Certificates` vs `/certificates`
+
+### Why it happened
+
+`App.jsx` defined the route as `path="/Certificates"` (capital C). The sitemap generator in `scripts/generate-seo.cjs` also used `/Certificates`. Vercel's servers run on Linux, where URLs are case-sensitive. Any link or bookmark using `/certificates` (lowercase) would hit the `*` wildcard route and render the NotFound page instead of the Certificates page.
+
+### Fix
+
+- Changed `path="/Certificates"` to `path="/certificates"` in `src/App.jsx`
+- Changed `/Certificates` to `/certificates` in `scripts/generate-seo.cjs`
+
+Both the route and the sitemap now consistently use lowercase, matching standard URL conventions.
+
+---
+
+## Issue 4 — Dead config files: `_redirects` and `public/.htaccess`
+
+### Why it happened
+
+- `_redirects` is a Netlify-specific file. It has zero effect on Vercel.
+- `public/.htaccess` is Apache server config. Vercel is not Apache and ignores it entirely. It gets copied into `dist/` and served as a downloadable static file.
+
+Neither file causes the 404 directly, but both create confusion about which routing config is actually active.
+
+### Recommendation
+
+These files can be safely deleted. They are not removed automatically here to avoid unrelated changes, but they serve no purpose on Vercel.
+
+---
+
+## Files Changed
+
+| File | Change |
+|---|---|
+| `vercel.json` | Replaced deprecated `routes` + `handle: filesystem` with modern `rewrites` using asset-excluding regex |
+| `public/vercel.json` | Deleted — was being copied into `dist/` and overriding the root config |
+| `src/App.jsx` | Changed `path="/Certificates"` to `path="/certificates"` |
+| `scripts/generate-seo.cjs` | Changed `/Certificates` to `/certificates` in sitemap pages array |
+
+---
+
+## Why the Solution Works
+
+Vercel's `rewrites` key processes routes **after** static file serving by default. The regex `/((?!assets|.*\\..*).*)`  matches any path that:
+- Does not start with `assets/` (protects the Vite JS/CSS bundle directory)
+- Does not contain a `.` (protects files like `logo.png`, `sitemap.xml`, `robots.txt`, `cv.pdf`)
+
+All SPA routes (`/`, `/about`, `/projects`, `/services`, `/contact`, `/certificates`) contain no dots and don't start with `assets/`, so they are rewritten to `index.html`. React Router's `BrowserRouter` then reads `window.location.pathname` and renders the correct page component.
+
+---
 
 ## Future Recommendations
 
-1. **Never place `vercel.json` inside `public/`** — anything in `public/` is served as a static file and also copied into `dist/`, which will shadow your root deployment config.
-2. **Use `rewrites` not `routes`** — the `routes` key is the legacy Vercel routing API and is incompatible with `rewrites`, `redirects`, and `headers` keys. Always use `rewrites` for SPA fallback.
-3. **The `_redirects` file** in the project root is a Netlify-specific file and has no effect on Vercel. It can be removed to avoid confusion.
-4. **The `public/.htaccess` file** is Apache server config and has no effect on Vercel. It can be removed.
-5. Consider adding a `"framework": "vite"` hint to `vercel.json` so Vercel auto-detects the output directory without manual configuration.
+1. Never place `vercel.json` inside `public/` — it will be copied into `dist/` and shadow the root config.
+2. Always use `rewrites` not `routes` for SPA fallback on Vercel. The `routes` key is the legacy API and is incompatible with `rewrites`, `redirects`, and `headers`.
+3. Keep all URL paths lowercase. Linux servers are case-sensitive; `/Certificates` and `/certificates` are different URLs.
+4. Remove `_redirects` (Netlify) and `public/.htaccess` (Apache) — they do nothing on Vercel and mislead anyone debugging routing issues.
+5. The `dist/` folder is in `.gitignore` and should never be committed. Vercel builds from source on every deployment.
