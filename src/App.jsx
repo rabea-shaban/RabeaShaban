@@ -12,6 +12,7 @@ import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
 import Projects from '@/pages/Projects';
 import Services from '@/pages/Services';
+import { Analytics } from '@vercel/analytics/react';
 import { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
 
@@ -48,6 +49,7 @@ function App() {
           </main>
           <Footer />
           <Toaster />
+          <Analytics />
         </div>
       </Router>
     </ThemeProvider>
