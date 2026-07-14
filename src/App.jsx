@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { Toaster } from '@/components/ui/toaster';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import Navbar from '@/components/Navbar';
-import MobileDock from '@/components/MobileDock';
 import BackToTop from '@/components/BackToTop';
 import FloatingContact from '@/components/FloatingContact';
-import Home from '@/pages/Home';
+import Footer from '@/components/Footer';
+import MobileDock from '@/components/MobileDock';
+import Navbar from '@/components/Navbar';
+import { Toaster } from '@/components/ui/toaster';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 import About from '@/pages/About';
+import Certificates from '@/pages/Certificates';
+import Contact from '@/pages/Contact';
+import Home from '@/pages/Home';
+import NotFound from '@/pages/NotFound';
 import Projects from '@/pages/Projects';
 import Services from '@/pages/Services';
-import Contact from '@/pages/Contact';
-import Certificates from '@/pages/Certificates';
-import NotFound from '@/pages/NotFound';
-import Footer from '@/components/Footer';
+import { useEffect } from 'react';
+import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -42,7 +42,7 @@ function App() {
               <Route path="/projects" element={<Projects />} />
               <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/Certificates" element={<Certificates />} />
+              <Route path="/certificates" element={<Certificates />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
