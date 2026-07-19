@@ -93,6 +93,8 @@ const Projects = () => {
                     alt={`${project.title} project screenshot`}
                     src={project.img}
                     loading="lazy"
+                    width="400"
+                    height="192"
                   />
                   {project.featured && (
                     <div className="absolute top-4 left-4">

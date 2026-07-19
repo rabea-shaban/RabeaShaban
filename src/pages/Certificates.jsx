@@ -117,6 +117,9 @@ const Certificates = () => {
                           src={certificate.image}
                           alt={certificate.title}
                           className="w-full h-full object-cover group-hover/image:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          width="400"
+                          height="192"
                           onError={(e) => {
                             e.target.style.display = 'none';
                             const fallback = e.target.parentElement?.querySelector('.image-fallback');
@@ -326,6 +329,9 @@ const Certificates = () => {
                       src={selectedCertificate.image}
                       alt={selectedCertificate.title}
                       className="max-h-[55vh] max-w-full object-contain"
+                      loading="lazy"
+                      width="800"
+                      height="500"
                       onError={(e) => {
                         e.target.style.display = 'none';
                         const fallback = e.target.parentElement?.querySelector('.modal-image-fallback');

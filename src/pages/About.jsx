@@ -163,6 +163,8 @@ const About = () => {
               alt="Rabea Shaban working on software development"
               className="w-80 h-80 rounded-2xl shadow-2xl object-cover border border-border group-hover:scale-[1.02] transition-transform duration-500 relative z-10"
               loading="lazy"
+              width="320"
+              height="320"
             />
           </motion.div>
         </div>

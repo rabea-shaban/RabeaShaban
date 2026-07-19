@@ -19,6 +19,18 @@ const Home = () => {
     keywords: "Full Stack Software Engineer, MERN Stack, React Developer, Node.js Developer, Web Development Portfolio, Egypt Developer"
   });
 
+  // Viewport mobile check to optimize performance
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Typing Animation
   const roles = ["MERN Stack Developer", "AWS Cloud Practitioner", "Docker & Kubernetes Specialist"];
   const [text, setText] = useState("");
@@ -76,14 +88,14 @@ const Home = () => {
         
         {/* Floating parallax blobs */}
         <motion.div
-          style={{ x: springX, y: springY }}
+          style={isMobile ? {} : { x: springX, y: springY }}
           className="absolute -top-40 -left-40 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none floating-animation"
         ></motion.div>
         <motion.div
-          style={{ x: useSpring(mouseX, { stiffness: 40, damping: 25 }), y: useSpring(mouseY, { stiffness: 40, damping: 25 }) }}
+          style={isMobile ? {} : { x: useSpring(mouseX, { stiffness: 40, damping: 25 }), y: useSpring(mouseY, { stiffness: 40, damping: 25 }) }}
           className="absolute bottom-10 -right-20 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"
-          animate={{ scale: [1, 1.1, 1], rotate: [0, 45, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          animate={isMobile ? {} : { scale: [1, 1.1, 1], rotate: [0, 45, 0] }}
+          transition={isMobile ? {} : { duration: 10, repeat: Infinity, ease: "easeInOut" }}
         ></motion.div>
         <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-pink-500/10 rounded-full blur-[90px] pointer-events-none floating-animation" style={{ animationDelay: "2s" }}></div>
 
@@ -102,6 +114,10 @@ const Home = () => {
                 className="w-full h-full object-cover rounded-full border-2 border-background"
                 alt="Rabea Shaban - Full Stack Software Engineer"
                 src={MyImgProfile}
+                fetchpriority="high"
+                loading="eager"
+                width="144"
+                height="144"
               />
             </motion.div>
 
