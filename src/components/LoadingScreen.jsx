@@ -6,8 +6,16 @@ const LoadingScreen = () => {
   // Detect if Lighthouse or SpeedInsights is auditing to bypass loading screen for maximum performance score
   const isLighthouse = typeof navigator !== 'undefined' && /Lighthouse|Google-Lighthouse|SpeedInsights/i.test(navigator.userAgent);
   
-  // Only show the loading screen once per session
-  const isFirstVisit = typeof window !== 'undefined' && !sessionStorage.getItem("portfolio_loaded");
+  // Only show the loading screen once per session (wrapped in try-catch to prevent crash if sessionStorage is blocked)
+  let isFirstVisit = true;
+  try {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      isFirstVisit = !window.sessionStorage.getItem("portfolio_loaded");
+    }
+  } catch (e) {
+    isFirstVisit = false; // Bypass loading screen if sessionStorage is blocked/private mode
+  }
+  
   const shouldShowLoading = !isLighthouse && isFirstVisit;
 
   const [loading, setLoading] = useState(shouldShowLoading);
@@ -17,7 +25,13 @@ const LoadingScreen = () => {
     
     const timer = setTimeout(() => {
       setLoading(false);
-      sessionStorage.setItem("portfolio_loaded", "true");
+      try {
+        if (typeof window !== 'undefined' && window.sessionStorage) {
+          window.sessionStorage.setItem("portfolio_loaded", "true");
+        }
+      } catch (e) {
+        // Ignore Storage SecurityExceptions
+      }
     }, 1200); // slightly reduced from 1600 for better user experience
     
     return () => clearTimeout(timer);

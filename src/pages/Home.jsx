@@ -64,6 +64,8 @@ const Home = () => {
 
   const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+  const springX2 = useSpring(mouseX, { stiffness: 40, damping: 25 });
+  const springY2 = useSpring(mouseY, { stiffness: 40, damping: 25 });
 
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
@@ -92,7 +94,7 @@ const Home = () => {
           className="absolute -top-40 -left-40 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none floating-animation"
         ></motion.div>
         <motion.div
-          style={isMobile ? {} : { x: useSpring(mouseX, { stiffness: 40, damping: 25 }), y: useSpring(mouseY, { stiffness: 40, damping: 25 }) }}
+          style={isMobile ? {} : { x: springX2, y: springY2 }}
           className="absolute bottom-10 -right-20 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"
           animate={isMobile ? {} : { scale: [1, 1.1, 1], rotate: [0, 45, 0] }}
           transition={isMobile ? {} : { duration: 10, repeat: Infinity, ease: "easeInOut" }}
