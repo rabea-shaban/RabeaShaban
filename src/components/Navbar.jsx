@@ -74,6 +74,7 @@ const Navbar = () => {
             size="icon"
             onClick={toggleTheme}
             className="ml-2 rounded-full w-8 h-8 hover:bg-primary/10"
+            aria-label="Toggle theme"
           >
             {theme === "dark" ? (
               <Sun className="h-4 w-4" />
@@ -85,7 +86,13 @@ const Navbar = () => {
   
         {/* Mobile Theme Toggle */}
         <div className="md:hidden flex items-center">
-          <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full w-8 h-8">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={toggleTheme} 
+            className="rounded-full w-8 h-8"
+            aria-label="Toggle theme"
+          >
             {theme === "dark" ? (
               <Sun className="h-4 w-4" />
             ) : (

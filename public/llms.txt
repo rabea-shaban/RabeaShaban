@@ -1,0 +1,16 @@
+# rabea-shaban | Full Stack Software Engineer Portfolio
+
+This is the official portfolio website of Rabea Shaban, a professional Full Stack Software Engineer specializing in MERN Stack development, Cloud Architecture, and DevOps practices. 
+
+## Main Navigation
+- [Home](https://rabea-shaban.vercel.app/)
+- [About Me](https://rabea-shaban.vercel.app/about)
+- [Projects](https://rabea-shaban.vercel.app/projects)
+- [Services](https://rabea-shaban.vercel.app/services)
+- [Certificates & Credentials](https://rabea-shaban.vercel.app/Certificates)
+- [Contact Me](https://rabea-shaban.vercel.app/contact)
+
+## Core Technical Skills
+- **Frontend**: React, Next.js, JavaScript (ES6+), TypeScript, Tailwind CSS, HTML5, CSS3, Bootstrap, Figma
+- **Backend & Database**: Node.js, Express.js, ASP.NET Core, C#, Entity Framework, MongoDB, SQL Server, MySQL, RESTful APIs, JWT Authentication, WebSocket (Socket.io)
+- **Cloud & DevOps**: Amazon Web Services (AWS), Docker, Kubernetes, Terraform, GitHub Actions, Helm, Prometheus, Grafana, Linux (Ubuntu/Debian), Nginx

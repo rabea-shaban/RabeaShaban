@@ -45,3 +45,6 @@ Desktop.ini
 # Testing
 coverage/
 .nyc_output/
+
+.vercel
+.env*

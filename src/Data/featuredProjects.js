@@ -1,6 +1,6 @@
-import Kashf3laj from "../Img/Kashf3laj.png";
-import CarRent from "../Img/CarRent.png";
-import Latest_Products from "../Img/Latest_Products.png";
+import Kashf3laj from "../Img/Kashf3laj.jpg";
+import CarRent from "../Img/CarRent.jpg";
+import Latest_Products from "../Img/Latest_Products.jpg";
 
 export const featuredProjects = [
   {
