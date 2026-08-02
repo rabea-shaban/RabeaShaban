@@ -21,8 +21,28 @@ import TansiqGarden from "../Img/TansiqGarden.jpg";
 import TaskOenUpskilling from "../Img/TaskOenUpskilling.jpg";
 import UMS from "../Img/UMS.jpg";
 import Sa2yanti from "../Img/Screenshot 2026-08-02 180424.png";
+import EduSphere from "../Img/EduSphere.jpg";
 
 export const projects = [
+  {
+    title: "EduSphere",
+    description: "Cloud-based Enterprise SaaS E-Learning & Communication Platform facilitating interactive digital learning between teachers and students, with real-time messaging, WebRTC audio/video calls, and admin management tools.",
+    tech: ["Next.js", "React", "TypeScript", "Node.js", "Express.js", "MongoDB", "Socket.io", "WebRTC", "Tailwind CSS", "Cloudflare R2"],
+    category: ["Next.js", "Full Stack", "web-app"],
+    demo: "https://education-spheree.vercel.app/",
+    github: "https://github.com/rabea-shaban/EduSphere",
+    featured: true,
+    features: [
+      "Real-time 1-on-1 & Group Messaging with Read Receipts (✓✓).",
+      "Native WebRTC peer-to-peer Voice & Video Calling without third-party media servers.",
+      "In-app Voice Recording & Custom Electronic Waveform Audio Player.",
+      "Cloudflare R2 S3-compatible cloud storage for course media, recordings, and assignments.",
+      "Role-based access control (JWT authentication) with MongoDB & Mongoose ORM models."
+    ],
+    challenges: "Building low-latency WebRTC RTCPeerConnection signaling and presence handling via Socket.io while managing media streams across diverse client networks.",
+    lessons: "Mastered real-time communication architectures, Web Audio API synthesis, and Cloudflare R2 object storage integration in Next.js App Router.",
+    img: EduSphere,
+  },
 
   {
     title: "Sa2yanti",
