@@ -22,30 +22,13 @@ import TaskOenUpskilling from "../Img/TaskOenUpskilling.jpg";
 import UMS from "../Img/UMS.jpg";
 
 export const projects = [
-  {
-    title: "Journey Care Mother",
-    description: "A comprehensive MERN-stack platform for pregnancy tracking, infant growth logs, and virtual consultations with healthcare practitioners. Features automated weekly milestones and chat features.",
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Redux Toolkit", "Tailwind CSS", "Socket.io"],
-    category: ["React", "web-app"],
-    demo: "https://journey-care.vercel.app/",
-    github: "https://github.com/rabea-shaban/journey-care-mother",
-    featured: true,
-    features: [
-      "Role-based access controls for mothers, doctors, and administrators.",
-      "Secure user authentication and session management using JSON Web Tokens (JWT).",
-      "Interactive analytics dashboard showing personalized health metrics and child logs.",
-      "Comprehensive appointment booking system and doctor schedule manager."
-    ],
-    challenges: "Designing robust MongoDB schemas to represent complex polymorphic relationships between different user roles, while ensuring secure API route guards on backend controllers.",
-    lessons: "Mastered the creation of custom Express authorization middleware, managing client-side state in React, and architecting RESTful resources following REST guidelines.",
-    img: Kashf3laj,
-  },
+
   {
     title: "Sa2yanti",
     description: "Car maintenance request and booking application. Connects car owners with mechanics, supporting real-time location mapping, request pipelines, and pricing estimates.",
     tech: ["React", "Node.js", "Express.js", "MongoDB", "Google Maps", "JWT"],
     category: ["React", "web-app"],
-    demo: "https://sa2yanti.vercel.app/",
+    demo: "https://sy2antek.vercel.app/",
     github: "https://github.com/rabea-shaban/sa2yanti",
     featured: true,
     features: [
