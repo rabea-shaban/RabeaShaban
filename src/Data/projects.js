@@ -20,6 +20,7 @@ import TaksirWatarmim from "../Img/TaksirWatarmim.jpg";
 import TansiqGarden from "../Img/TansiqGarden.jpg";
 import TaskOenUpskilling from "../Img/TaskOenUpskilling.jpg";
 import UMS from "../Img/UMS.jpg";
+import Sa2yanti from "../Img/Screenshot 2026-08-02 180424.png";
 
 export const projects = [
 
@@ -39,7 +40,7 @@ export const projects = [
     ],
     challenges: "Implementing precise coordinates lookup calculations and querying MongoDB geospatial indexes correctly on small mobile viewports.",
     lessons: "Acquired experience consuming third-party mapping APIs, handling asynchronous coordinate lookups, and building fluid mobile touch targets.",
-    img: CarRent,
+    img: Sa2yanti,
   },
   {
     title: "AGRSUP",
